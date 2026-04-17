@@ -1,0 +1,39 @@
+﻿# === VARIABLES DE ENTORNO Y SECRETOS (CRÍTICO) ===
+.env
+
+# === PYTHON ===
+__pycache__/
+*.py[cod]
+*.class
+*.so
+backend/venv/
+backend/env/
+backend/*.egg-info/
+
+# === NODE / NEXT.JS / FRONTEND ===
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+*.tsbuildinfo
+next-env.d.ts
+
+# === DOCKER LOCAL ===
+# No subimos los datos de la base de datos local, solo la configuración
+# pgdata/ 
+
+# === SISTEMAS OPERATIVOS ===
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# === EDITORES DE CÓDIGO ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
