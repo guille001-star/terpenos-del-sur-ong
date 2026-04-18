@@ -11,9 +11,10 @@ from .models.models import Socio
 
 app = FastAPI(title=settings.PROJECT_NAME, version="0.1.0")
 
+# CORS Dinámico: Ahora lee la URL real del entorno
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[settings.FRONTEND_URL], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -54,19 +55,15 @@ def crear_socio(socio_data: SocioCreate, db = Depends(get_db)):
 @app.get("/api/socios")
 def obtener_socios(db = Depends(get_db)):
     socios = db.query(Socio).order_by(Socio.nombre_completo).all()
-    # Ahora incluimos el estado "esta_activo" para que el Frontend sepa si dibuja el botón
     return [{"id": s.id, "dni": s.dni, "nombre": s.nombre_completo, "correo": s.correo, "activo": s.esta_activo} for s in socios]
 
-# --- NUEVO ENDPOINT: BAJA LÓGICA ---
 @app.put("/api/socios/{socio_id}/baja")
 def dar_baja_socio(socio_id: str, db = Depends(get_db)):
     socio = db.query(Socio).filter(Socio.id == socio_id).first()
     if not socio:
         raise HTTPException(status_code=404, detail="Socio no encontrado")
-    
     if not socio.esta_activo:
         raise HTTPException(status_code=400, detail="El socio ya está dado de baja")
-        
     socio.esta_activo = False
     db.commit()
-    return {"mensaje": "Socio dado de baja correctamente (Baja Lógica)"}
+    return {"mensaje": "Socio dado de baja correctamente"}
