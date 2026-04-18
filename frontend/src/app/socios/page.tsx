@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const API_URL = "http://localhost:8000/api/socios";
+const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000") + "/api/socios";
 
 export default function SociosPage() {
   const [socios, setSocios] = useState([]);
@@ -126,3 +126,4 @@ export default function SociosPage() {
     </div>
   );
 }
+
