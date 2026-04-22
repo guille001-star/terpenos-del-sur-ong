@@ -11,7 +11,7 @@ class Settings(BaseModel):
     POSTGRES_DB: str
     POSTGRES_HOST: str = "localhost"
     POSTGRES_PORT: str = "5432"
-    FRONTEND_URL: str = "http://localhost:3000" # Por defecto es local
+    FRONTEND_URL: str = "http://localhost:3000"
 
     @property
     def DATABASE_URL(self) -> str:
@@ -21,5 +21,7 @@ settings = Settings(
     POSTGRES_USER=os.getenv("POSTGRES_USER"),
     POSTGRES_PASSWORD=os.getenv("POSTGRES_PASSWORD"),
     POSTGRES_DB=os.getenv("POSTGRES_DB"),
-    FRONTEND_URL=os.getenv("FRONTEND_URL", "http://localhost:3000") # Lee de entorno, si no existe, usa local
+    POSTGRES_HOST=os.getenv("POSTGRES_HOST", "localhost"), # <-- ESTA LÍNEA FALTABA
+    POSTGRES_PORT=os.getenv("POSTGRES_PORT", "5432"),      # <-- ESTA LÍNEA FALTABA
+    FRONTEND_URL=os.getenv("FRONTEND_URL", "http://localhost:3000")
 )
