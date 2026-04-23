@@ -1,0 +1,10 @@
+﻿Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+README.md
+.next
+.git
+.env*.local
+# Permiso explicito para que Docker no lo ignore en build time
+!.env.production
