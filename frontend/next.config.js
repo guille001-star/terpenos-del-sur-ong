@@ -2,8 +2,9 @@
 const nextConfig = {
   output: "standalone",
   typescript: {
-    ignoreBuildErrors: true, // Evita que el build falle por errores menores de tipos
+    ignoreBuildErrors: true,
   },
 };
 
 module.exports = nextConfig;
+// Build forzado con variables de entorno
